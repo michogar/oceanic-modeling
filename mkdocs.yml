@@ -1,0 +1,5 @@
+site_name: Modelization
+theme: material
+pages:
+- Index: index.md
+- HowTo: apuntes.md
