@@ -1,0 +1,586 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.6.4">
+    
+    
+      
+        <title>HowTo - Modeling</title>
+      
+    
+    
+      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application-e2807e330f.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href=".." title="Modeling" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+            
+            HowTo
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <div class="md-header-nav__source">
+          
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    Modeling
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Index" class="md-nav__link">
+      Index
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        HowTo
+      </label>
+    
+    <a href="./" title="HowTo" class="md-nav__link md-nav__link--active">
+      HowTo
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation-of-roms_tools" title="Installation of Roms_tools" class="md-nav__link">
+    Installation of Roms_tools
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creation-of-required-initial-files" title="Creation of required initial files" class="md-nav__link">
+    Creation of required initial files
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grid-creation" title="Grid creation" class="md-nav__link">
+    Grid creation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#surface-boundary-initial-conditions" title="Surface boundary initial conditions" class="md-nav__link">
+    Surface boundary initial conditions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temperature-and-salinity-initial-conditions" title="Temperature and Salinity initial conditions" class="md-nav__link">
+    Temperature and Salinity initial conditions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temperature-and-salinity-boundary-and-initial-condition" title="Temperature and salinity boundary and initial condition" class="md-nav__link">
+    Temperature and salinity boundary and initial condition
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compilation-of-model-and-running" title="Compilation of model and running" class="md-nav__link">
+    Compilation of model and running
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compilation-in-local-only-linux" title="Compilation in local (ONLY Linux)" class="md-nav__link">
+    Compilation in local (ONLY Linux)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilation-in-carlos-cloud" title="Compilation in "Carlos Cloud"" class="md-nav__link">
+    Compilation in "Carlos Cloud"
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connecting-from-windows" title="Connecting from Windows" class="md-nav__link">
+    Connecting from Windows
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#installation-of-roms_tools" title="Installation of Roms_tools" class="md-nav__link">
+    Installation of Roms_tools
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creation-of-required-initial-files" title="Creation of required initial files" class="md-nav__link">
+    Creation of required initial files
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#grid-creation" title="Grid creation" class="md-nav__link">
+    Grid creation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#surface-boundary-initial-conditions" title="Surface boundary initial conditions" class="md-nav__link">
+    Surface boundary initial conditions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temperature-and-salinity-initial-conditions" title="Temperature and Salinity initial conditions" class="md-nav__link">
+    Temperature and Salinity initial conditions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temperature-and-salinity-boundary-and-initial-condition" title="Temperature and salinity boundary and initial condition" class="md-nav__link">
+    Temperature and salinity boundary and initial condition
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compilation-of-model-and-running" title="Compilation of model and running" class="md-nav__link">
+    Compilation of model and running
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compilation-in-local-only-linux" title="Compilation in local (ONLY Linux)" class="md-nav__link">
+    Compilation in local (ONLY Linux)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compilation-in-carlos-cloud" title="Compilation in "Carlos Cloud"" class="md-nav__link">
+    Compilation in "Carlos Cloud"
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connecting-from-windows" title="Connecting from Windows" class="md-nav__link">
+    Connecting from Windows
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="roms_agrif-installation-ubuntu-1704">ROMS_AGRIF Installation Ubuntu 17.04</h1>
+<h2 id="installation-of-roms_tools">Installation of Roms_tools</h2>
+<p>Download ROMS_AGRIF</p>
+<p><a href="ftp://ftp.legos.obs-mip.fr/pub/romsagrif/DATA_ROMS/CODE/Roms_Agrif_v3.1.1_07_07_2014.tar.gz">ROMS_AGRIF v3.1.1</a></p>
+<p>Uncompress tar</p>
+<pre><code>tar -zxvf Roms_Agrif_v3.1.1_07_07_2014.tar.gz
+</code></pre>
+<p>this will create a folder named <code>Roms_tools</code>. Download ROMSTOOLS</p>
+<p><a href="ftp://ftp.legos.obs-mip.fr/pub/romsagrif/DATA_ROMS/TOOLS/ROMSTOOLS_v3.1.1_07_07_2014.tar.gz">ROMSTOOLS v3.1.1</a></p>
+<p>and uncompress these tools into the <code>Roms_tools</code> folder:</p>
+<pre><code>tar -zxvf ROMSTOOLS_v3.1.1_07_07_2014.tar.gz
+</code></pre>
+<p>Download the toolboxes and softwares nedded by ROMSTOOLS</p>
+<p><a href="ftp://ftp.legos.obs-mip.fr/pub/romsagrif/DATA_ROMS/UTILITIES/Utilities_ROMSTOOLS_v3.0_21_12_2012.tar.gz">Utilities</a></p>
+<p>and uncompress them:</p>
+<pre><code>tar -zxvf Utilities_ROMSTOOLS_v3.0_21_12_2012.tar.gz
+</code></pre>
+<p>Copy and renamed <code>Run</code> folder:</p>
+<pre><code>cd Roms_tools
+cp Run Run_whatever
+</code></pre>
+<p>Install required <code>netcdf</code> libraries:</p>
+<pre><code>sudo apt install netcdf-bin libnetcdf-dev libnetcdff-dev
+</code></pre>
+<h2 id="creation-of-required-initial-files">Creation of required initial files</h2>
+<p>You will need download the needed datasets to create the required initial conditions.
+These datasets ar in the CROCO Datasets website
+<a href="http://www.croco-ocean.org/download/datasets/">http://www.croco-ocean.org/download/datasets/</a></p>
+<h3 id="grid-creation">Grid creation</h3>
+<p>Open Matlab and add <code>Run_whatever</code> folder:</p>
+<pre><code>&gt;&gt; cd Run_whatever
+&gt;&gt; start
+</code></pre>
+
+<p>execute <code>make_grid</code> to create netcdf with grid. To do this, we'll need the <code>etopo2.nc</code> file.</p>
+<p><a href="ftp://ftp.legos.obs-mip.fr/pub/romsagrif/DATA_ROMS/Topo_26_05_2004.tar.gz">Topo</a></p>
+<p>Once you get the <code>etopo2.nc</code> put this in the path:</p>
+<pre><code>Roms_tools/Topo/etopo2.nc
+</code></pre>
+<p>and then:</p>
+<pre><code>&gt;&gt; make_grid
+</code></pre>
+
+<blockquote>
+<p>If this error appears
+Undefined function or variable 'bitmax'.
+open in Matlab the m_grid.m file and replace every bitmax by flintmax</p>
+</blockquote>
+<h3 id="surface-boundary-initial-conditions">Surface boundary initial conditions</h3>
+<p>To make the forcing conditions, first we must get the needed netcdf files.</p>
+<p><a href="ftp://ftp.legos.obs-mip.fr/pub/romsagrif/DATA_ROMS/COADS05_2006_10_25.tar.gz">COADS05</a></p>
+<p>extract file into the <code>Roms_tools</code> and execute:</p>
+<pre><code>&gt;&gt; make_forcing
+</code></pre>
+
+<h3 id="temperature-and-salinity-initial-conditions">Temperature and Salinity initial conditions</h3>
+<p>First, download the needed datasets. In this case get the CARS2009 dataset</p>
+<p><a href="ftp://ftp.legos.obs-mip.fr/pub/romsagrif/DATA_ROMS/CARS2009_02_10_2013.tar.gz">CARS2009</a></p>
+<p>or</p>
+<p><a href="ftp://ftp.legos.obs-mip.fr/pub/romsagrif/DATA_ROMS/WOA2009_24_06_2011.tar.gz">WOA2009</a></p>
+<p>extract into the <code>Roms_tools</code> and then execute:</p>
+<pre><code>&gt;&gt; make_ini
+</code></pre>
+
+<blockquote>
+<p>We can execute the make_ini using CARS2009 or WOA2009. We can change the climate files
+modifying the romstools_param.h:
+        %climato_dir=cars2009_dir;
+        climato_dir=woa_dir;  % Select this to use the WOAPISCES</p>
+</blockquote>
+<h3 id="temperature-and-salinity-boundary-and-initial-condition">Temperature and salinity boundary and initial condition</h3>
+<p>To execute this, only:</p>
+<pre><code>&gt;&gt; make_clim
+</code></pre>
+
+<h2 id="compilation-of-model-and-running">Compilation of model and running</h2>
+<p>After the execution of the last 4 steps, we'll have 4 <code>netcdf</code> files into the <code>ROMS_FILES</code> folder:</p>
+<ul>
+<li>roms_clm.nc</li>
+<li>roms_frc.nc</li>
+<li>roms_grd.nc</li>
+<li>roms_ini.nc</li>
+</ul>
+<p>and other intermediate files not needed to get the model.</p>
+<h3 id="compilation-in-local-only-linux">Compilation in local (ONLY Linux)</h3>
+<p>Modify <code>jobcomp</code> file in the <code>Run_whatever</code> folder to use <code>lnetcdff</code>, adding:</p>
+<pre><code>...
+# If needed set your own NETCDF directories
+#
+NETCDFLIB="-L../../netcdf_x86_64 -lnetcdff"
+...
+</code></pre>
+<p>and execute:</p>
+<pre><code>./jobcomp
+</code></pre>
+<p>after the compilation finish, then execute the model:</p>
+<pre><code>./roms roms.in
+</code></pre>
+<h3 id="compilation-in-carlos-cloud">Compilation in "Carlos Cloud"</h3>
+<h4 id="connecting-from-windows">Connecting from Windows</h4>
+<p>We'll needed:</p>
+<ul>
+<li>Putty</li>
+<li>WinSCP</li>
+</ul>
+<p>With WinSCP we can copy the <code>nc</code> files from our <code>Run_whatever/ROMS_FILES</code> folder to our <code>rfirst/ROMS_FILES</code>
+or whatever in the computer of Carlos (<strong>CC</strong>). Then we must use Putty to connect us
+to the CC and launch the compilation of the model. To do this:</p>
+<pre><code>jobcomp
+</code></pre>
+<p>and after this finish</p>
+<pre><code>roms roms.in
+</code></pre>
+<p>If we want launch the model and get out from the console, we can execute:</p>
+<pre><code>nohup roms roms.in &gt; roms.out &amp; 2&gt;&amp;1 &amp;
+</code></pre>
+<p>this launch a process and return us a PID, or the number of the process. We can show
+the process running with:</p>
+<pre><code>ps
+</code></pre>
+<p>Once the model is created, then you must download the <code>nc</code> files to your computer. To do this, you can use
+WinSCP.</p>
+<blockquote>
+<p>To get CC credentials, contact with Carlos</p>
+</blockquote>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href=".." title="Index" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Index
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application-06a3e72efd.js"></script>
+      <script>app.initialize({url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

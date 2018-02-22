@@ -1,0 +1,74 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Modeling 2018", 
+            "title": "Index"
+        }, 
+        {
+            "location": "/#modeling-2018", 
+            "text": "", 
+            "title": "Modeling 2018"
+        }, 
+        {
+            "location": "/apuntes/", 
+            "text": "ROMS_AGRIF Installation Ubuntu 17.04\n\n\nInstallation of Roms_tools\n\n\nDownload ROMS_AGRIF\n\n\nROMS_AGRIF v3.1.1\n\n\nUncompress tar\n\n\ntar -zxvf Roms_Agrif_v3.1.1_07_07_2014.tar.gz\n\n\n\nthis will create a folder named \nRoms_tools\n. Download ROMSTOOLS\n\n\nROMSTOOLS v3.1.1\n\n\nand uncompress these tools into the \nRoms_tools\n folder:\n\n\ntar -zxvf ROMSTOOLS_v3.1.1_07_07_2014.tar.gz\n\n\n\nDownload the toolboxes and softwares nedded by ROMSTOOLS\n\n\nUtilities\n\n\nand uncompress them:\n\n\ntar -zxvf Utilities_ROMSTOOLS_v3.0_21_12_2012.tar.gz\n\n\n\nCopy and renamed \nRun\n folder:\n\n\ncd Roms_tools\ncp Run Run_whatever\n\n\n\nInstall required \nnetcdf\n libraries:\n\n\nsudo apt install netcdf-bin libnetcdf-dev libnetcdff-dev\n\n\n\nCreation of required initial files\n\n\nYou will need download the needed datasets to create the required initial conditions.\nThese datasets ar in the CROCO Datasets website\n\nhttp://www.croco-ocean.org/download/datasets/\n\n\nGrid creation\n\n\nOpen Matlab and add \nRun_whatever\n folder:\n\n\n cd Run_whatever\n\n start\n\n\n\n\nexecute \nmake_grid\n to create netcdf with grid. To do this, we'll need the \netopo2.nc\n file.\n\n\nTopo\n\n\nOnce you get the \netopo2.nc\n put this in the path:\n\n\nRoms_tools/Topo/etopo2.nc\n\n\n\nand then:\n\n\n make_grid\n\n\n\n\n\n\nIf this error appears\nUndefined function or variable 'bitmax'.\nopen in Matlab the m_grid.m file and replace every bitmax by flintmax\n\n\n\n\nSurface boundary initial conditions\n\n\nTo make the forcing conditions, first we must get the needed netcdf files.\n\n\nCOADS05\n\n\nextract file into the \nRoms_tools\n and execute:\n\n\n make_forcing\n\n\n\n\nTemperature and Salinity initial conditions\n\n\nFirst, download the needed datasets. In this case get the CARS2009 dataset\n\n\nCARS2009\n\n\nor\n\n\nWOA2009\n\n\nextract into the \nRoms_tools\n and then execute:\n\n\n make_ini\n\n\n\n\n\n\nWe can execute the make_ini using CARS2009 or WOA2009. We can change the climate files\nmodifying the romstools_param.h:\n        %climato_dir=cars2009_dir;\n        climato_dir=woa_dir;  % Select this to use the WOAPISCES\n\n\n\n\nTemperature and salinity boundary and initial condition\n\n\nTo execute this, only:\n\n\n make_clim\n\n\n\n\nCompilation of model and running\n\n\nAfter the execution of the last 4 steps, we'll have 4 \nnetcdf\n files into the \nROMS_FILES\n folder:\n\n\n\n\nroms_clm.nc\n\n\nroms_frc.nc\n\n\nroms_grd.nc\n\n\nroms_ini.nc\n\n\n\n\nand other intermediate files not needed to get the model.\n\n\nCompilation in local (ONLY Linux)\n\n\nModify \njobcomp\n file in the \nRun_whatever\n folder to use \nlnetcdff\n, adding:\n\n\n...\n# If needed set your own NETCDF directories\n#\nNETCDFLIB=\"-L../../netcdf_x86_64 -lnetcdff\"\n...\n\n\n\nand execute:\n\n\n./jobcomp\n\n\n\nafter the compilation finish, then execute the model:\n\n\n./roms roms.in\n\n\n\nCompilation in \"Carlos Cloud\"\n\n\nConnecting from Windows\n\n\nWe'll needed:\n\n\n\n\nPutty\n\n\nWinSCP\n\n\n\n\nWith WinSCP we can copy the \nnc\n files from our \nRun_whatever/ROMS_FILES\n folder to our \nrfirst/ROMS_FILES\n\nor whatever in the computer of Carlos (\nCC\n). Then we must use Putty to connect us\nto the CC and launch the compilation of the model. To do this:\n\n\njobcomp\n\n\n\nand after this finish\n\n\nroms roms.in\n\n\n\nIf we want launch the model and get out from the console, we can execute:\n\n\nnohup roms roms.in \n roms.out \n 2\n1 \n\n\n\n\nthis launch a process and return us a PID, or the number of the process. We can show\nthe process running with:\n\n\nps\n\n\n\nOnce the model is created, then you must download the \nnc\n files to your computer. To do this, you can use\nWinSCP.\n\n\n\n\nTo get CC credentials, contact with Carlos", 
+            "title": "HowTo"
+        }, 
+        {
+            "location": "/apuntes/#roms_agrif-installation-ubuntu-1704", 
+            "text": "", 
+            "title": "ROMS_AGRIF Installation Ubuntu 17.04"
+        }, 
+        {
+            "location": "/apuntes/#installation-of-roms_tools", 
+            "text": "Download ROMS_AGRIF  ROMS_AGRIF v3.1.1  Uncompress tar  tar -zxvf Roms_Agrif_v3.1.1_07_07_2014.tar.gz  this will create a folder named  Roms_tools . Download ROMSTOOLS  ROMSTOOLS v3.1.1  and uncompress these tools into the  Roms_tools  folder:  tar -zxvf ROMSTOOLS_v3.1.1_07_07_2014.tar.gz  Download the toolboxes and softwares nedded by ROMSTOOLS  Utilities  and uncompress them:  tar -zxvf Utilities_ROMSTOOLS_v3.0_21_12_2012.tar.gz  Copy and renamed  Run  folder:  cd Roms_tools\ncp Run Run_whatever  Install required  netcdf  libraries:  sudo apt install netcdf-bin libnetcdf-dev libnetcdff-dev", 
+            "title": "Installation of Roms_tools"
+        }, 
+        {
+            "location": "/apuntes/#creation-of-required-initial-files", 
+            "text": "You will need download the needed datasets to create the required initial conditions.\nThese datasets ar in the CROCO Datasets website http://www.croco-ocean.org/download/datasets/", 
+            "title": "Creation of required initial files"
+        }, 
+        {
+            "location": "/apuntes/#grid-creation", 
+            "text": "Open Matlab and add  Run_whatever  folder:   cd Run_whatever  start  execute  make_grid  to create netcdf with grid. To do this, we'll need the  etopo2.nc  file.  Topo  Once you get the  etopo2.nc  put this in the path:  Roms_tools/Topo/etopo2.nc  and then:   make_grid   If this error appears\nUndefined function or variable 'bitmax'.\nopen in Matlab the m_grid.m file and replace every bitmax by flintmax", 
+            "title": "Grid creation"
+        }, 
+        {
+            "location": "/apuntes/#surface-boundary-initial-conditions", 
+            "text": "To make the forcing conditions, first we must get the needed netcdf files.  COADS05  extract file into the  Roms_tools  and execute:   make_forcing", 
+            "title": "Surface boundary initial conditions"
+        }, 
+        {
+            "location": "/apuntes/#temperature-and-salinity-initial-conditions", 
+            "text": "First, download the needed datasets. In this case get the CARS2009 dataset  CARS2009  or  WOA2009  extract into the  Roms_tools  and then execute:   make_ini   We can execute the make_ini using CARS2009 or WOA2009. We can change the climate files\nmodifying the romstools_param.h:\n        %climato_dir=cars2009_dir;\n        climato_dir=woa_dir;  % Select this to use the WOAPISCES", 
+            "title": "Temperature and Salinity initial conditions"
+        }, 
+        {
+            "location": "/apuntes/#temperature-and-salinity-boundary-and-initial-condition", 
+            "text": "To execute this, only:   make_clim", 
+            "title": "Temperature and salinity boundary and initial condition"
+        }, 
+        {
+            "location": "/apuntes/#compilation-of-model-and-running", 
+            "text": "After the execution of the last 4 steps, we'll have 4  netcdf  files into the  ROMS_FILES  folder:   roms_clm.nc  roms_frc.nc  roms_grd.nc  roms_ini.nc   and other intermediate files not needed to get the model.", 
+            "title": "Compilation of model and running"
+        }, 
+        {
+            "location": "/apuntes/#compilation-in-local-only-linux", 
+            "text": "Modify  jobcomp  file in the  Run_whatever  folder to use  lnetcdff , adding:  ...\n# If needed set your own NETCDF directories\n#\nNETCDFLIB=\"-L../../netcdf_x86_64 -lnetcdff\"\n...  and execute:  ./jobcomp  after the compilation finish, then execute the model:  ./roms roms.in", 
+            "title": "Compilation in local (ONLY Linux)"
+        }, 
+        {
+            "location": "/apuntes/#compilation-in-carlos-cloud", 
+            "text": "", 
+            "title": "Compilation in \"Carlos Cloud\""
+        }, 
+        {
+            "location": "/apuntes/#connecting-from-windows", 
+            "text": "We'll needed:   Putty  WinSCP   With WinSCP we can copy the  nc  files from our  Run_whatever/ROMS_FILES  folder to our  rfirst/ROMS_FILES \nor whatever in the computer of Carlos ( CC ). Then we must use Putty to connect us\nto the CC and launch the compilation of the model. To do this:  jobcomp  and after this finish  roms roms.in  If we want launch the model and get out from the console, we can execute:  nohup roms roms.in   roms.out   2 1    this launch a process and return us a PID, or the number of the process. We can show\nthe process running with:  ps  Once the model is created, then you must download the  nc  files to your computer. To do this, you can use\nWinSCP.   To get CC credentials, contact with Carlos", 
+            "title": "Connecting from Windows"
+        }
+    ]
+}
