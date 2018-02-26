@@ -144,7 +144,12 @@ We'll needed:
 * WinSCP
 
 With WinSCP we can copy the `nc` files from our `Run_whatever/ROMS_FILES` folder to our `rfirst/ROMS_FILES`
-or whatever in the computer of Carlos (**CC**). Then we must use Putty to connect us
+or whatever in the computer of Carlos (**CC**). Then we must copy our configuration files too:
+* `params.h`
+* `cppdefs.h`
+in the `rfirst` folder
+
+Then we must use Putty to connect us
 to the CC and launch the compilation of the model. To do this:
 
     jobcomp
@@ -166,3 +171,54 @@ Once the model is created, then you must download the `nc` files to your compute
 WinSCP.
 
 > To get CC credentials, contact with Carlos
+
+### Configuring the model
+After we execute `make_grid` we'll obtain the `LLm` and `MMm` parameters that we must copy
+in the `params.h` file.
+
+* theta_s: more layers close to the surface
+* theta_b: more layers close to the bottom
+* hc: the minimmun depth of the model
+
+To run `zlevs`:
+
+    depth=zlevs(100, 0, 5, 0, 10, 30, 'r', 2)
+
+`r` is the point in the Arakawa cell. It could be `r`, the center of the cell or `w` the top of the cell
+`vtransform` allow define the way the layer grow from coast to offshore. There are only two values `1` or `2`
+
+## Nesting grids
+To nest a smallest grid into our model in Matlab,
+
+    >> nestgui
+
+![](images/child_area.png)
+
+select the parent grid, in our case `roms_grd.nc` into de `ROMS_FILES` folder. Click in the
+`Define child` button and select with the mouse the child grid area into the window opened.
+
+With `New child topo` we could select a new high resolution topography to the child.
+`Match volume` allow match the volume between child and mom. Only in cases that mom knows
+the child topo.
+
+`r-factor` indicates the depth relation between cells. Shoudn't be bigger than 20%.
+`n-band` in the boundary between mom and child the values must be identical. This value
+allow set how many cells are the boundary between them.
+`Hmin` set the minimmun depth to simplify the model. Only in cases where the bathimetry has
+depths under this minimmun depth.
+
+After we set the whole params, we have to get the
+
+`refine coeff` set the refinement between mom and child grid. In the 99% cases this value
+will be 3 for numeric stability. Is good that a mom cell is equal to a child cell.
+
+We generate the `roms.in` from the gui and we can modify values into this file.
+
+Clicking into the `Create AGRIF_FixedGrids.in` generates the values from the UI to a file
+into the root folder.
+
+Once all these files are created we can run the model:
+
+* Open `cppdefs.h` and `define` the `AGRIF` and `AGRIF_2WAY` variables
+* run `jobcomp`
+* and then `roms roms.in`
