@@ -236,6 +236,19 @@
     Compilation in local (ONLY Linux)
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-with-intel-compiler" title="Running with Intel compiler" class="md-nav__link">
+    Running with Intel compiler
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -273,6 +286,61 @@
         <li class="md-nav__item">
   <a href="#nesting-grids" title="Nesting grids" class="md-nav__link">
     Nesting grids
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generating-rivers" title="Generating Rivers" class="md-nav__link">
+    Generating Rivers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global-attributes" title="Global attributes" class="md-nav__link">
+    Global attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dimensions" title="Dimensions" class="md-nav__link">
+    Dimensions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables-and-attributes" title="Variables and attributes" class="md-nav__link">
+    Variables and attributes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make-in-zoom-in" title="Make in zoom in" class="md-nav__link">
+    Make in zoom in
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-winds-state" title="Changing winds state" class="md-nav__link">
+    Changing winds state
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tides" title="Tides" class="md-nav__link">
+    Tides
   </a>
   
 </li>
@@ -367,6 +435,19 @@
     Compilation in local (ONLY Linux)
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#running-with-intel-compiler" title="Running with Intel compiler" class="md-nav__link">
+    Running with Intel compiler
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -404,6 +485,61 @@
         <li class="md-nav__item">
   <a href="#nesting-grids" title="Nesting grids" class="md-nav__link">
     Nesting grids
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generating-rivers" title="Generating Rivers" class="md-nav__link">
+    Generating Rivers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global-attributes" title="Global attributes" class="md-nav__link">
+    Global attributes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dimensions" title="Dimensions" class="md-nav__link">
+    Dimensions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables-and-attributes" title="Variables and attributes" class="md-nav__link">
+    Variables and attributes
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#make-in-zoom-in" title="Make in zoom in" class="md-nav__link">
+    Make in zoom in
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changing-winds-state" title="Changing winds state" class="md-nav__link">
+    Changing winds state
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tides" title="Tides" class="md-nav__link">
+    Tides
   </a>
   
 </li>
@@ -508,7 +644,7 @@ modifying the romstools_param.h:
 </ul>
 <p>and other intermediate files not needed to get the model.</p>
 <h3 id="compilation-in-local-only-linux">Compilation in local (ONLY Linux)</h3>
-<p>Modify <code>jobcomp</code> file in the <code>Run_whatever</code> folder to use <code>lnetcdff</code>, adding:</p>
+<p>Modify <code>jobcomp</code> file into the <code>Run_whatever</code> folder to use <code>lnetcdff</code>, adding:</p>
 <pre><code>...
 # If needed set your own NETCDF directories
 #
@@ -520,6 +656,18 @@ NETCDFLIB="-L../../netcdf_x86_64 -lnetcdff"
 </code></pre>
 <p>after the compilation finish, then execute the model:</p>
 <pre><code>./roms roms.in
+</code></pre>
+<h5 id="running-with-intel-compiler">Running with Intel compiler</h5>
+<p>First, you'll need install the Intel Fortran Compiler into the machine.</p>
+<p>Get the Intel software in Student version from <a href="https://software.intel.com/en-us/parallel-studio-xe/choose-download/student-linux-fortran">Intel Web</a></p>
+<p>Change the Linux compiler to the Intel compiler</p>
+<pre><code>LINUX_FC = ifc
+</code></pre>
+<p>then in the <code>jobcomp</code> file we must change flag options where <code>$LINUX_FC=ifort || $LINUX_FC=ifc</code></p>
+<pre><code>FFLAGS1="-03 -xAVX -72 -fno-alias -i4 -r8"
+</code></pre>
+<p>To use the multiproccessing calculation we must change in the <code>cppdefs.h</code></p>
+<pre><code>define OPENMP
 </code></pre>
 <h3 id="compilation-in-carlos-cloud">Compilation in "Carlos Cloud"</h3>
 <h4 id="connecting-from-windows">Connecting from Windows</h4>
@@ -592,6 +740,128 @@ into the root folder.</p>
 <li>run <code>jobcomp</code></li>
 <li>and then <code>roms roms.in</code></li>
 </ul>
+<h2 id="generating-rivers">Generating Rivers</h2>
+<p><code>clobber</code> removes the file if it exits.</p>
+<p><code>redef</code> allow us define the attributes of the netcdf file. The order to define its if:
+<em> Global attributes
+</em> Dimensions
+* Variables and attributes</p>
+<h3 id="global-attributes">Global attributes</h3>
+<pre><code>%% Global attributes:
+nc.title = ncchar('River file to use with ROMS');
+nc.title = 'River file to use with ROMS';
+nc.type = ncchar('ROMS river file');
+nc.type = 'ROMS river file';
+</code></pre>
+<h3 id="dimensions">Dimensions</h3>
+<pre><code>%% Dimensions:
+
+nc('qbar_time') = nd;
+nc('temp_src_time') = nd;
+nc('salt_src_time') = nd;
+nc('n_riv') = nr;
+nc('RivnameStrLen') = 14;
+</code></pre>
+<h3 id="variables-and-attributes">Variables and attributes</h3>
+<pre><code>%% Variables and attributes:
+
+nc{'qbar_time'} = ncdouble('qbar_time'); %% 12 elements.
+nc{'qbar_time'}.long_name = ncchar('river runoff time');
+nc{'qbar_time'}.units = ncchar('days');
+nc{'qbar_time'}.cycle_length = ncdouble(36500);
+
+nc{'temp_src_time'} = ncdouble('temp_src_time'); %% 12 elements.
+nc{'temp_src_time'}.long_name = ncchar('river temperature time');
+nc{'temp_src_time'}.units = ncchar('days');
+nc{'temp_src_time'}.cycle_length = ncdouble(36500);
+
+nc{'salt_src_time'} = ncdouble('salt_src_time'); %% 12 elements.
+nc{'salt_src_time'}.long_name = ncchar('river salinity time');
+nc{'salt_src_time'}.units = ncchar('days');
+nc{'salt_src_time'}.cycle_length = ncdouble(36500);
+
+nc{'Qbar'} = ncdouble('n_riv', 'qbar_time'); %% 36 elements.
+nc{'Qbar'}.long_name = ncchar('river runoff time');
+nc{'Qbar'}.units = ncchar('m3/s');
+
+nc{'temp_src'} = ncdouble('n_riv', 'qbar_time'); %% 36 elements.
+nc{'temp_src'}.long_name = ncchar('river temperature time');
+nc{'temp_src'}.units = ncchar('ºC');
+
+nc{'salt_src'} = ncdouble('n_riv', 'qbar_time'); %% 36 elements.
+nc{'salt_src'}.long_name = ncchar('river salinity time');
+nc{'salt_src'}.units = ncchar('psu');
+
+nc{'riv_name'} = ncchar('n_riv', 'RivnameStrLen'); %% 6 elements.
+nc{'riv_name'}.long_name = ncchar('river runoff time');
+</code></pre>
+<p><code>endef</code> and <code>close</code> to save these data into the file.</p>
+<p>Then we could generate the data to populate the file.</p>
+<p>To add the river to the model, we need open the mask generated after the <code>make_grid</code> execution.
+Then we must draw 3 cells in the exact point where we want add the river. Get the exact location
+in cell location units to put them in the <code>roms.in</code> file.</p>
+<p>If river flows to west or south you must take the cell in land.</p>
+<p><img alt="" src="../images/river_es.png" /></p>
+<p>for rivers flowing to east or north you have to define the river in the water cell.</p>
+<p><img alt="" src="../images/river_wn.png" /></p>
+<pre><code>psource_ncfile:   Nsrc  Isrc  Jsrc  Dsrc qbardir  Lsrc  Tsrc   runoff file name
+                                  ROMS_FILES/roms_rivers.nc
+                 1
+                        56  46  0  -1   30*T   5.0  0.0
+</code></pre>
+<p>In the <code>cppdefs.h</code> set <code>define</code> to the <code>PSOURCE</code> and <code>PSOURCE_NCFILE</code> variables.</p>
+<h2 id="make-in-zoom-in">Make in zoom in</h2>
+<p>With the <code>axis([minX maxX minY maxY minZ maxZ])</code> we can manage the zoom into the model.
+Introducing setting axis into the loop and adding time to the <code>minX</code> and <code>minY</code> we can
+show a zoom to the point.</p>
+<h2 id="changing-winds-state">Changing winds state</h2>
+<p>See the nc forcing file and the wind variables appears:</p>
+<pre><code>nc{'sustr'}
+nc{'svstr'}
+</code></pre>
+<p>and we can modify the value in we are interested, one month of north winds, one week or whatever.
+We must know the relation between thc wind velocity and the streess caused by this wind on
+the ocean surface. There is equations to solve this issue. Aprox 10m/s will be 0.1N/m2.</p>
+<p>Open the file in write mode:</p>
+<pre><code>  nc=netcdf('ROMS_FILES/roms_frc.nc', 'w');
+  nc{'sustr'}(:,:,:)=0
+  nc{'svstr'}(:,:,:)=-.1
+
+  close(nc)
+</code></pre>
+<h2 id="tides">Tides</h2>
+<p>Run:</p>
+<pre><code>  &gt;&gt; make_tides
+</code></pre>
+<p>We need define location and date into the 'romstools_param.m':</p>
+<pre><code>%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% 5 - Parameters for tidal forcing
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% TPXO file name (TPXO6 or TPXO7)
+%
+tidename=[DATADIR,'TPXO7/TPXO7.nc'];
+%
+% Number of tides component to process
+%
+Ntides=10;
+%
+% Chose order from the rank in the TPXO file :
+% "M2 S2 N2 K2 K1 O1 P1 Q1 Mf Mm"
+% " 1  2  3  4  5  6  7  8  9 10"
+%
+tidalrank=[1 2 3 4 5 6 7 8 9 10];
+%
+% Compare with tidegauge observations
+%
+lon0 =  18.37;   % Example:
+lat0 = -33.91;   % Cape Town location
+Z0   =  1;       % Mean depth of tide gauge
+%
+</code></pre>
+<p>and <code>define TIDES</code> variable in the <code>cppdefs.h</code> file.</p>
                 
                   
                 
