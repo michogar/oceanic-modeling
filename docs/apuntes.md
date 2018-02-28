@@ -118,7 +118,7 @@ and other intermediate files not needed to get the model.
 
 ### Compilation in local (ONLY Linux)
 
-Modify `jobcomp` file in the `Run_whatever` folder to use `lnetcdff`, adding:
+Modify `jobcomp` file into the `Run_whatever` folder to use `lnetcdff`, adding:
 
     ...
     # If needed set your own NETCDF directories
@@ -133,6 +133,24 @@ and execute:
 after the compilation finish, then execute the model:
 
     ./roms roms.in
+
+##### Running with Intel compiler
+
+First, you'll need install the Intel Fortran Compiler into the machine.
+
+Get the Intel software in Student version from [Intel Web](https://software.intel.com/en-us/parallel-studio-xe/choose-download/student-linux-fortran)
+
+Change the Linux compiler to the Intel compiler
+
+    LINUX_FC = ifc
+
+then in the `jobcomp` file we must change flag options where `$LINUX_FC=ifort || $LINUX_FC=ifc`
+
+    FFLAGS1="-03 -xAVX -72 -fno-alias -i4 -r8"
+
+To use the multiproccessing calculation we must change in the `cppdefs.h`
+
+    define OPENMP
 
 ### Compilation in "Carlos Cloud"
 
@@ -222,3 +240,145 @@ Once all these files are created we can run the model:
 * Open `cppdefs.h` and `define` the `AGRIF` and `AGRIF_2WAY` variables
 * run `jobcomp`
 * and then `roms roms.in`
+
+## Generating Rivers
+`clobber` removes the file if it exits.
+
+`redef` allow us define the attributes of the netcdf file. The order to define its if:
+* Global attributes
+* Dimensions
+* Variables and attributes
+
+### Global attributes
+
+    %% Global attributes:
+    nc.title = ncchar('River file to use with ROMS');
+    nc.title = 'River file to use with ROMS';
+    nc.type = ncchar('ROMS river file');
+    nc.type = 'ROMS river file';
+
+### Dimensions
+
+    %% Dimensions:
+
+    nc('qbar_time') = nd;
+    nc('temp_src_time') = nd;
+    nc('salt_src_time') = nd;
+    nc('n_riv') = nr;
+    nc('RivnameStrLen') = 14;
+
+### Variables and attributes
+
+    %% Variables and attributes:
+
+    nc{'qbar_time'} = ncdouble('qbar_time'); %% 12 elements.
+    nc{'qbar_time'}.long_name = ncchar('river runoff time');
+    nc{'qbar_time'}.units = ncchar('days');
+    nc{'qbar_time'}.cycle_length = ncdouble(36500);
+
+    nc{'temp_src_time'} = ncdouble('temp_src_time'); %% 12 elements.
+    nc{'temp_src_time'}.long_name = ncchar('river temperature time');
+    nc{'temp_src_time'}.units = ncchar('days');
+    nc{'temp_src_time'}.cycle_length = ncdouble(36500);
+
+    nc{'salt_src_time'} = ncdouble('salt_src_time'); %% 12 elements.
+    nc{'salt_src_time'}.long_name = ncchar('river salinity time');
+    nc{'salt_src_time'}.units = ncchar('days');
+    nc{'salt_src_time'}.cycle_length = ncdouble(36500);
+
+    nc{'Qbar'} = ncdouble('n_riv', 'qbar_time'); %% 36 elements.
+    nc{'Qbar'}.long_name = ncchar('river runoff time');
+    nc{'Qbar'}.units = ncchar('m3/s');
+
+    nc{'temp_src'} = ncdouble('n_riv', 'qbar_time'); %% 36 elements.
+    nc{'temp_src'}.long_name = ncchar('river temperature time');
+    nc{'temp_src'}.units = ncchar('ºC');
+
+    nc{'salt_src'} = ncdouble('n_riv', 'qbar_time'); %% 36 elements.
+    nc{'salt_src'}.long_name = ncchar('river salinity time');
+    nc{'salt_src'}.units = ncchar('psu');
+
+    nc{'riv_name'} = ncchar('n_riv', 'RivnameStrLen'); %% 6 elements.
+    nc{'riv_name'}.long_name = ncchar('river runoff time');
+
+`endef` and `close` to save these data into the file.
+
+Then we could generate the data to populate the file.
+
+To add the river to the model, we need open the mask generated after the `make_grid` execution.
+Then we must draw 3 cells in the exact point where we want add the river. Get the exact location
+in cell location units to put them in the `roms.in` file.
+
+If river flows to west or south you must take the cell in land.
+
+![](images/river_es.png)
+
+for rivers flowing to east or north you have to define the river in the water cell.
+
+![](images/river_wn.png)
+
+    psource_ncfile:   Nsrc  Isrc  Jsrc  Dsrc qbardir  Lsrc  Tsrc   runoff file name
+                                      ROMS_FILES/roms_rivers.nc
+                     1
+                            56  46  0  -1   30*T   5.0  0.0
+
+In the `cppdefs.h` set `define` to the `PSOURCE` and `PSOURCE_NCFILE` variables.
+
+## Make in zoom in
+With the `axis([minX maxX minY maxY minZ maxZ])` we can manage the zoom into the model.
+Introducing setting axis into the loop and adding time to the `minX` and `minY` we can
+show a zoom to the point.
+
+## Changing winds state
+See the nc forcing file and the wind variables appears:
+
+    nc{'sustr'}
+    nc{'svstr'}
+
+and we can modify the value in we are interested, one month of north winds, one week or whatever.
+We must know the relation between thc wind velocity and the streess caused by this wind on
+the ocean surface. There is equations to solve this issue. Aprox 10m/s will be 0.1N/m2.
+
+Open the file in write mode:
+
+      nc=netcdf('ROMS_FILES/roms_frc.nc', 'w');
+      nc{'sustr'}(:,:,:)=0
+      nc{'svstr'}(:,:,:)=-.1
+
+      close(nc)
+
+## Tides
+Run:
+
+      >> make_tides
+
+We need define location and date into the 'romstools_param.m':
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    % 5 - Parameters for tidal forcing
+    %
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    % TPXO file name (TPXO6 or TPXO7)
+    %
+    tidename=[DATADIR,'TPXO7/TPXO7.nc'];
+    %
+    % Number of tides component to process
+    %
+    Ntides=10;
+    %
+    % Chose order from the rank in the TPXO file :
+    % "M2 S2 N2 K2 K1 O1 P1 Q1 Mf Mm"
+    % " 1  2  3  4  5  6  7  8  9 10"
+    %
+    tidalrank=[1 2 3 4 5 6 7 8 9 10];
+    %
+    % Compare with tidegauge observations
+    %
+    lon0 =  18.37;   % Example:
+    lat0 = -33.91;   % Cape Town location
+    Z0   =  1;       % Mean depth of tide gauge
+    %
+
+and `define TIDES` variable in the `cppdefs.h` file.
