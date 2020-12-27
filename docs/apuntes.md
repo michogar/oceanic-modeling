@@ -154,6 +154,8 @@ To use the multiproccessing calculation we must change in the `cppdefs.h`
     
 #### Compiling with MPI
 
+[https://lsi.ugr.es/jmantas/ppr/ayuda/datos/instalaciones/Instalacion_OpenMPI.pdf](https://lsi.ugr.es/jmantas/ppr/ayuda/datos/instalaciones/Instalacion_OpenMPI.pdf)
+
 Install the necessary libraries:
 
 ```bash
