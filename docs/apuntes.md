@@ -151,6 +151,20 @@ then in the `jobcomp` file we must change flag options where `$LINUX_FC=ifort ||
 To use the multiproccessing calculation we must change in the `cppdefs.h`
 
     define OPENMP
+    
+#### Compiling with MPI
+
+Install the necessary libraries:
+
+```bash
+sudo apt-get install openmpi-bin openmpi-common openssh-client openssh-server libopenmpi1.3 libopenmpi-dbg libopenmpi-dev
+```
+
+Compile and run the model using mpi:
+
+```bash
+mpirun -np 4 ./croco croco.in > croco.log
+```
 
 ### Compilation in "Carlos Cloud"
 
