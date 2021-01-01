@@ -165,7 +165,7 @@ sudo apt-get install openmpi-bin openmpi-common openssh-client openssh-server li
 Compile and run the model using mpi:
 
 ```bash
-mpirun -np 4 ./croco croco.in > croco.log
+mpirun --use-hwthread-cpus ./croco croco.in > croco.log
 ```
 
 ### Compilation in "Carlos Cloud"
